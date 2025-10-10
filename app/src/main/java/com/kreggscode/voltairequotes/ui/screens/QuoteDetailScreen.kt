@@ -43,7 +43,6 @@ fun QuoteDetailScreen(
     
     val context = LocalContext.current
     var tts by remember { mutableStateOf<TextToSpeech?>(null) }
-    var isSpeaking by remember { mutableStateOf(false) }
     var showDetails by remember { mutableStateOf(true) }
     
     // Initialize TTS
@@ -200,26 +199,21 @@ fun QuoteDetailScreen(
                         // Speak English
                         Button(
                             onClick = {
-                                if (isSpeaking) {
-                                    tts?.stop()
-                                    isSpeaking = false
-                                } else {
-                                    tts?.language = Locale.US
-                                    tts?.speak(quote.Quote, TextToSpeech.QUEUE_FLUSH, null, null)
-                                    isSpeaking = true
-                                }
+                                tts?.stop()
+                                tts?.language = Locale.US
+                                tts?.speak(quote.Quote, TextToSpeech.QUEUE_FLUSH, null, null)
                             },
                             modifier = Modifier.weight(1f),
                             colors = ButtonDefaults.buttonColors(
-                                containerColor = if (isSpeaking) Color(0xFFFF5722) else Color(0xFF2196F3)
+                                containerColor = Color(0xFF2196F3)
                             )
                         ) {
                             Icon(
-                                imageVector = if (isSpeaking) Icons.Default.Stop else Icons.Default.VolumeUp,
+                                imageVector = Icons.Default.VolumeUp,
                                 contentDescription = null
                             )
                             Spacer(Modifier.width(4.dp))
-                            Text(if (isSpeaking) "Stop" else "Speak")
+                            Text("Speak")
                         }
                     }
                 }

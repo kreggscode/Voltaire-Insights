@@ -34,42 +34,51 @@ fun FloatingBottomBar(
 ) {
     val isDark = MaterialTheme.colorScheme.background == Color(0xFF000000)
     
+    // Use a transparent background container
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 12.dp),
-        contentAlignment = Alignment.Center
+            .background(Color.Transparent),
+        contentAlignment = Alignment.BottomCenter
     ) {
-        Surface(
+        Box(
             modifier = Modifier
-                .height(72.dp)
-                .fillMaxWidth(0.95f)
-                .shadow(
-                    elevation = 12.dp,
-                    shape = RoundedCornerShape(24.dp),
-                    ambientColor = Color.Black.copy(alpha = 0.2f),
-                    spotColor = Color.Black.copy(alpha = 0.2f)
-                ),
-            shape = RoundedCornerShape(24.dp),
-            color = if (isDark) {
-                MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.95f)
-            } else {
-                MaterialTheme.colorScheme.surface.copy(alpha = 0.98f)
-            }
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 16.dp),
+            contentAlignment = Alignment.Center
         ) {
-            Row(
+            Surface(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 8.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
+                    .height(72.dp)
+                    .fillMaxWidth(0.95f)
+                    .shadow(
+                        elevation = 16.dp,
+                        shape = RoundedCornerShape(28.dp),
+                        ambientColor = Color.Black.copy(alpha = 0.3f),
+                        spotColor = Color.Black.copy(alpha = 0.3f)
+                    ),
+                shape = RoundedCornerShape(28.dp),
+                color = if (isDark) {
+                    MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.95f)
+                } else {
+                    MaterialTheme.colorScheme.surface.copy(alpha = 0.98f)
+                },
+                tonalElevation = 8.dp
             ) {
-                items.forEach { item ->
-                    BottomNavItemView(
-                        item = item,
-                        isSelected = currentRoute == item.route,
-                        onClick = { onItemClick(item.route) }
-                    )
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    items.forEach { item ->
+                        BottomNavItemView(
+                            item = item,
+                            isSelected = currentRoute == item.route,
+                            onClick = { onItemClick(item.route) }
+                        )
+                    }
                 }
             }
         }

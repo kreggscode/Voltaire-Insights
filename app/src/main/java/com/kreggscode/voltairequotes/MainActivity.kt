@@ -6,10 +6,13 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Chat
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -66,9 +69,9 @@ fun MainScreen(
     
     val bottomNavItems = listOf(
         BottomNavItem(Screen.Home.route, Icons.Default.Home, "Home"),
-        BottomNavItem(Screen.Chat.route, Icons.Default.Chat, "Chat"),
+        BottomNavItem(Screen.Chat.route, Icons.AutoMirrored.Filled.Chat, "Chat"),
         BottomNavItem(Screen.Favorites.route, Icons.Default.Favorite, "Favorites"),
-        BottomNavItem(Screen.Works.route, Icons.Default.MenuBook, "Works"),
+        BottomNavItem(Screen.Works.route, Icons.AutoMirrored.Filled.MenuBook, "Works"),
         BottomNavItem(Screen.Settings.route, Icons.Default.Settings, "Settings")
     )
     
@@ -81,20 +84,38 @@ fun MainScreen(
                     items = bottomNavItems,
                     currentRoute = currentRoute ?: Screen.Home.route,
                     onItemClick = { route ->
-                        navController.navigate(route) {
-                            popUpTo(Screen.Home.route) {
-                                saveState = true
+                        if (currentRoute != route) {
+                            navController.navigate(route) {
+                                // Pop up to the start destination of the graph to
+                                // avoid building up a large stack of destinations
+                                popUpTo(Screen.Home.route) {
+                                    saveState = true
+                                    inclusive = false
+                                }
+                                // Avoid multiple copies of the same destination when
+                                // reselecting the same item
+                                launchSingleTop = true
+                                // Restore state when reselecting a previously selected item
+                                restoreState = true
                             }
-                            launchSingleTop = true
-                            restoreState = true
                         }
                     }
                 )
             }
         },
-        containerColor = MaterialTheme.colorScheme.background
+        containerColor = MaterialTheme.colorScheme.background,
+        contentColor = MaterialTheme.colorScheme.onBackground
     ) { paddingValues ->
-        Box(modifier = Modifier.padding(paddingValues)) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(
+                    top = paddingValues.calculateTopPadding(),
+                    start = 0.dp,
+                    end = 0.dp,
+                    bottom = 0.dp
+                )
+        ) {
             NavGraph(
                 navController = navController,
                 quoteViewModel = quoteViewModel,

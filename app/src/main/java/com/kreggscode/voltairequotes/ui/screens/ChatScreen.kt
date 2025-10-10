@@ -132,7 +132,7 @@ fun ChatScreen(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
@@ -140,10 +140,14 @@ fun ChatScreen(
             // Messages list
             LazyColumn(
                 modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth(),
+                    .fillMaxSize(),
                 state = listState,
-                contentPadding = PaddingValues(16.dp),
+                contentPadding = PaddingValues(
+                    start = 16.dp,
+                    end = 16.dp,
+                    top = 16.dp,
+                    bottom = 120.dp // Space for floating input box + nav bar
+                ),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 items(messages) { message ->
@@ -157,16 +161,21 @@ fun ChatScreen(
                 }
             }
             
-            // Input area
+            // Floating input area
             Surface(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 100.dp),
+                shape = RoundedCornerShape(28.dp),
                 color = MaterialTheme.colorScheme.surface,
-                shadowElevation = 8.dp
+                shadowElevation = 12.dp,
+                tonalElevation = 4.dp
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
+                        .padding(horizontal = 12.dp, vertical = 8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
@@ -178,7 +187,9 @@ fun ChatScreen(
                         shape = RoundedCornerShape(24.dp),
                         colors = OutlinedTextFieldDefaults.colors(
                             focusedBorderColor = MaterialTheme.colorScheme.primary,
-                            unfocusedBorderColor = MaterialTheme.colorScheme.outline
+                            unfocusedBorderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f),
+                            unfocusedContainerColor = Color.Transparent,
+                            focusedContainerColor = Color.Transparent
                         ),
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Send),
                         keyboardActions = KeyboardActions(
@@ -199,6 +210,7 @@ fun ChatScreen(
                                 inputText = ""
                             }
                         },
+                        modifier = Modifier.size(48.dp),
                         containerColor = MaterialTheme.colorScheme.primary,
                         contentColor = Color.White
                     ) {

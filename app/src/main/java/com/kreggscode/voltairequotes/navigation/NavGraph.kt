@@ -51,7 +51,14 @@ fun NavGraph(
                     navController.navigate(Screen.About.route)
                 },
                 onWorksClick = {
-                    navController.navigate(Screen.Works.route)
+                    navController.navigate(Screen.Works.route) {
+                        popUpTo(Screen.Home.route) {
+                            saveState = true
+                            inclusive = false
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 }
             )
         }

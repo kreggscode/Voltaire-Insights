@@ -262,25 +262,25 @@ These files are automatically loaded and merged on first launch.
 
 **🏠 Home Screen**
 <br><br>
-<img src="screenshots/Screenshot_20251010_163009.png" alt="Home Screen" width="200"/>
+<img src="screenshots/1.png" alt="Home Screen" width="200"/>
 
 *Beautiful category cards with unique gradient colors*
 
 </td>
 <td width="33%" align="center">
 
-**💬 Quote Details**
+**💬 Chat Screen**
 <br><br>
-<img src="screenshots/Screenshot_20251010_163013.png" alt="Quote Details" width="200"/>
+<img src="screenshots/2.png" alt="Chat Screen" width="200"/>
 
-*Full quote with French translation and actions*
+*AI-powered chat with Voltaire*
 
 </td>
 <td width="33%" align="center">
 
 **⭐ Favorites**
 <br><br>
-<img src="screenshots/Screenshot_20251010_163017.png" alt="Favorites" width="200"/>
+<img src="screenshots/3.png" alt="Favorites" width="200"/>
 
 *Saved quotes in one place*
 
@@ -291,27 +291,47 @@ These files are automatically loaded and merged on first launch.
 
 **📚 Works**
 <br><br>
-<img src="screenshots/Screenshot_20251010_163020.png" alt="Works" width="200"/>
+<img src="screenshots/4.png" alt="Works" width="200"/>
 
 *Voltaire's literary works*
 
 </td>
 <td width="33%" align="center">
 
-**🎨 Category View**
+**⚙️ Settings**
 <br><br>
-<img src="screenshots/Screenshot_20251010_163025.png" alt="Category View" width="200"/>
+<img src="screenshots/5.png" alt="Settings" width="200"/>
 
-*Quotes filtered by category*
+*Daily quotes, random quotes, and app preferences*
 
 </td>
 <td width="33%" align="center">
 
-**⚙️ Settings**
+**💬 Quote Details**
 <br><br>
-<img src="screenshots/Screenshot_20251010_163030.png" alt="Settings" width="200"/>
+<img src="screenshots/6.png" alt="Quote Details" width="200"/>
 
-*App preferences and notifications*
+*Full quote with French translation and actions*
+
+</td>
+</tr>
+<tr>
+<td width="50%" align="center">
+
+**🎨 Category View**
+<br><br>
+<img src="screenshots/7.png" alt="Category View" width="300"/>
+
+*Quotes filtered by category*
+
+</td>
+<td width="50%" align="center">
+
+**📱 App Overview**
+<br><br>
+<img src="screenshots/8.png" alt="App Overview" width="300"/>
+
+*Beautiful floating navigation and modern design*
 
 </td>
 </tr>

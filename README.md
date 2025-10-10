@@ -83,7 +83,7 @@
 | 🧭 **Navigation** | Compose Navigation |
 | 🔄 **Async** | Kotlin Coroutines + Flow |
 | 📦 **Serialization** | kotlinx.serialization |
-| ⚙️ **Background** | WorkManager for notifications |
+| ⚙️ **Background** | WorkManager for notifications | 
 | 🎯 **DI** | Manual (ViewModel Factory) |
 | 📱 **Min SDK** | API 24 (Android 7.0+) |
 | 🎯 **Target SDK** | API 34 (Android 14) |

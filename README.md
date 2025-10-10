@@ -256,35 +256,66 @@ These files are automatically loaded and merged on first launch.
 
 <div align="center">
 
-### *Coming Soon - App in Action*
-
 <table>
 <tr>
 <td width="33%" align="center">
 
 **🏠 Home Screen**
+<br><br>
+<img src="screenshots/Screenshot_20251010_163009.png" alt="Home Screen" width="200"/>
 
-Beautiful category cards with unique gradient colors
+*Beautiful category cards with unique gradient colors*
 
 </td>
 <td width="33%" align="center">
 
 **💬 Quote Details**
+<br><br>
+<img src="screenshots/Screenshot_20251010_163013.png" alt="Quote Details" width="200"/>
 
-Full quote with French translation, TTS, and sharing
+*Full quote with French translation and actions*
 
 </td>
 <td width="33%" align="center">
 
 **⭐ Favorites**
+<br><br>
+<img src="screenshots/Screenshot_20251010_163017.png" alt="Favorites" width="200"/>
 
-All your saved quotes in one place
+*Saved quotes in one place*
+
+</td>
+</tr>
+<tr>
+<td width="33%" align="center">
+
+**📚 Works**
+<br><br>
+<img src="screenshots/Screenshot_20251010_163020.png" alt="Works" width="200"/>
+
+*Voltaire's literary works*
+
+</td>
+<td width="33%" align="center">
+
+**🎨 Category View**
+<br><br>
+<img src="screenshots/Screenshot_20251010_163025.png" alt="Category View" width="200"/>
+
+*Quotes filtered by category*
+
+</td>
+<td width="33%" align="center">
+
+**⚙️ Settings**
+<br><br>
+<img src="screenshots/Screenshot_20251010_163030.png" alt="Settings" width="200"/>
+
+*App preferences and notifications*
 
 </td>
 </tr>
 </table>
-
-*Screenshots will be added soon!*
 
 </div>
 

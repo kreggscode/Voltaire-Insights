@@ -5,20 +5,12 @@
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Preserve line numbers for debugging stack traces
+-keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Keep crash reporting information
+-keepattributes *Annotation*
 
 # Keep data classes for kotlinx.serialization
 -keepattributes *Annotation*, InnerClasses
@@ -31,10 +23,25 @@
     kotlinx.serialization.KSerializer serializer(...);
 }
 
--keep,includedescriptorclasses class com.voltaire.insights.**$$serializer { *; }
--keepclassmembers class com.voltaire.insights.** {
-    *** Companion;
-}
--keepclasseswithmembers class com.voltaire.insights.** {
-    kotlinx.serialization.KSerializer serializer(...);
-}
+# Keep Pollinations API data classes
+-keep class com.kreggscode.voltairequotes.data.Pollinations** { *; }
+
+# Keep Room database entities and DAOs
+-keep class com.kreggscode.voltairequotes.data.Quote { *; }
+-keep class com.kreggscode.voltairequotes.data.QuoteDao { *; }
+-keep class com.kreggscode.voltairequotes.data.QuoteDatabase { *; }
+
+# Keep Retrofit and OkHttp
+-dontwarn okhttp3.**
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions
+
+# Keep Gson
+-keepattributes Signature
+-keep class com.google.gson.** { *; }
+-keep class * implements com.google.gson.TypeAdapter
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer

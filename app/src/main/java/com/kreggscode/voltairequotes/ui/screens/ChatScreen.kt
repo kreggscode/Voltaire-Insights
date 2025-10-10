@@ -11,6 +11,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.DeleteOutline
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -59,6 +60,31 @@ fun ChatScreen(
         }
     }
     
+    var showDeleteDialog by remember { mutableStateOf(false) }
+    
+    if (showDeleteDialog) {
+        AlertDialog(
+            onDismissRequest = { showDeleteDialog = false },
+            title = { Text("New Chat") },
+            text = { Text("Start a new conversation with Voltaire? This will clear the current chat history.") },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        viewModel.clearChat()
+                        showDeleteDialog = false
+                    }
+                ) {
+                    Text("Start New Chat")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDeleteDialog = false }) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
+    
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -80,6 +106,21 @@ fun ChatScreen(
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
                             contentDescription = "Back"
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(
+                        onClick = { showDeleteDialog = true },
+                        enabled = messages.size > 1
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.DeleteOutline,
+                            contentDescription = "New Chat",
+                            tint = if (messages.size > 1) 
+                                MaterialTheme.colorScheme.onSurface 
+                            else 
+                                MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
                         )
                     }
                 },

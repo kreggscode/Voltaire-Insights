@@ -216,36 +216,55 @@ private fun CategoryCard(
 @Composable
 private fun getCategoryGradient(categoryName: String): List<Color> {
     return when (categoryName.lowercase()) {
-        "wisdom" -> listOf(Color(0xFF667eea), Color(0xFF764ba2))
-        "freedom" -> listOf(Color(0xFFf093fb), Color(0xFFf5576c))
-        "tolerance" -> listOf(Color(0xFF4facfe), Color(0xFF00f2fe))
-        "religion" -> listOf(Color(0xFFfa709a), Color(0xFFfee140))
-        "justice" -> listOf(Color(0xFF30cfd0), Color(0xFF330867))
-        "love" -> listOf(Color(0xFFff9a9e), Color(0xFFfecfef))
-        "work" -> listOf(Color(0xFFffecd2), Color(0xFFfcb69f))
-        "science" -> listOf(Color(0xFF89f7fe), Color(0xFF66a6ff))
-        "education" -> listOf(Color(0xFFfbc2eb), Color(0xFFa6c1ee))
-        "government" -> listOf(Color(0xFFfdcbf1), Color(0xFFe6dee9))
-        "history" -> listOf(Color(0xFFa1c4fd), Color(0xFfc2e9fb))
-        "morality" -> listOf(Color(0xFFffeaa7), Color(0xFFfdcb6e))
-        "society" -> listOf(Color(0xFFff6b6b), Color(0xFFfeca57))
-        "politics" -> listOf(Color(0xFF5f27cd), Color(0xFF341f97))
-        "death" -> listOf(Color(0xFF868f96), Color(0xFF596164))
-        "women" -> listOf(Color(0xFFfccb90), Color(0xFFd57eeb))
-        "men" -> listOf(Color(0xFF2193b0), Color(0xFF6dd5ed))
-        "humanity" -> listOf(Color(0xFFee9ca7), Color(0xFFffdde1))
-        "success" -> listOf(Color(0xFFfad0c4), Color(0xFFffd1ff))
-        "art" -> listOf(Color(0xFF8e44ad), Color(0xFF9b59b6))
-        "time" -> listOf(Color(0xFF16a085), Color(0xFF1abc9c))
-        "truth" -> listOf(Color(0xFFf39c12), Color(0xFFf1c40f))
-        "happiness" -> listOf(Color(0xFFe74c3c), Color(0xFFec7063))
-        "philosophy" -> listOf(Color(0xFF3498db), Color(0xFF5dade2))
-        "money" -> listOf(Color(0xFFe67e22), Color(0xFFf39c12))
-        "knowledge" -> listOf(Color(0xFF27ae60), Color(0xFF2ecc71))
-        "friendship" -> listOf(Color(0xFFf39c12), Color(0xFFe67e22))
-        "courage" -> listOf(Color(0xFFc0392b), Color(0xFFe74c3c))
-        "freedom of speech" -> listOf(Color(0xFF16a085), Color(0xFF27ae60))
-        "war & peace" -> listOf(Color(0xFF7f8c8d), Color(0xFF95a5a6))
+        // Row 1: Purple & Orange (contrasting)
+        "wisdom" -> listOf(Color(0xFF667eea), Color(0xFF764ba2))  // Purple
+        "freedom" -> listOf(Color(0xFFf093fb), Color(0xFFf5576c))  // Pink-Red
+        
+        // Row 2: Deep Purple & Orange (contrasting)
+        "politics" -> listOf(Color(0xFF5f27cd), Color(0xFF341f97))  // Deep Purple
+        "money" -> listOf(Color(0xFFe67e22), Color(0xFFf39c12))  // Orange
+        
+        // Row 3: Green & Orange (contrasting)
+        "knowledge" -> listOf(Color(0xFF27ae60), Color(0xFF2ecc71))  // Green
+        "friendship" -> listOf(Color(0xFFff9a56), Color(0xFFff6a3d))  // Coral Orange
+        
+        // Row 4: Red & Teal (contrasting)
+        "courage" -> listOf(Color(0xFFc0392b), Color(0xFFe74c3c))  // Red
+        "freedom of speech" -> listOf(Color(0xFF16a085), Color(0xFF1abc9c))  // Teal
+        
+        // Row 5: Gray & Light Blue (contrasting)
+        "war & peace" -> listOf(Color(0xFF7f8c8d), Color(0xFF95a5a6))  // Gray
+        "history" -> listOf(Color(0xFFa1c4fd), Color(0xFfc2e9fb))  // Light Blue
+        
+        // Row 6: Purple & Teal (contrasting)
+        "education" -> listOf(Color(0xFFfbc2eb), Color(0xFFa6c1ee))  // Light Purple
+        "justice" -> listOf(Color(0xFF30cfd0), Color(0xFF330867))  // Teal-Purple
+        
+        // Row 7: Pink-Orange & Teal (contrasting)
+        "religion" -> listOf(Color(0xFFfa709a), Color(0xFFfee140))  // Pink-Yellow
+        "time" -> listOf(Color(0xFF16a085), Color(0xFF1abc9c))  // Teal
+        
+        // Row 8: Yellow & Red (contrasting)
+        "truth" -> listOf(Color(0xFFf39c12), Color(0xFFf1c40f))  // Yellow-Gold
+        "happiness" -> listOf(Color(0xFFe74c3c), Color(0xFFec7063))  // Red-Coral
+        
+        // Row 9: Blue & Gray (contrasting)
+        "philosophy" -> listOf(Color(0xFF3498db), Color(0xFF5dade2))  // Blue
+        "death" -> listOf(Color(0xFF868f96), Color(0xFF596164))  // Gray
+        
+        // Additional categories
+        "tolerance" -> listOf(Color(0xFF4facfe), Color(0xFF00f2fe))  // Cyan
+        "love" -> listOf(Color(0xFFff9a9e), Color(0xFFfecfef))  // Pink
+        "work" -> listOf(Color(0xFFffecd2), Color(0xFFfcb69f))  // Peach
+        "science" -> listOf(Color(0xFF89f7fe), Color(0xFF66a6ff))  // Blue
+        "government" -> listOf(Color(0xFFfdcbf1), Color(0xFFe6dee9))  // Light Pink
+        "morality" -> listOf(Color(0xFFffeaa7), Color(0xFFfdcb6e))  // Yellow
+        "society" -> listOf(Color(0xFFff6b6b), Color(0xFFfeca57))  // Red-Yellow
+        "women" -> listOf(Color(0xFFfccb90), Color(0xFFd57eeb))  // Orange-Purple
+        "men" -> listOf(Color(0xFF2193b0), Color(0xFF6dd5ed))  // Blue
+        "humanity" -> listOf(Color(0xFFee9ca7), Color(0xFFffdde1))  // Pink
+        "success" -> listOf(Color(0xFFfad0c4), Color(0xFFffd1ff))  // Light Pink
+        "art" -> listOf(Color(0xFF8e44ad), Color(0xFF9b59b6))  // Purple
         else -> listOf(Color(0xFF667eea), Color(0xFF764ba2))
     }
 }

@@ -263,7 +263,7 @@ These files are automatically loaded and merged on first launch.
 
 **🏠 Home Screen**
 <br><br>
-<img src="screenshots/1.png" alt="Home Screen" width="200"/>
+<img src="https://raw.githubusercontent.com/kreggscode/Voltaire-Insights/main/screenshots/1.png" alt="Home Screen" width="200"/>
 
 *Beautiful category cards with unique gradient colors*
 
@@ -272,7 +272,7 @@ These files are automatically loaded and merged on first launch.
 
 **💬 Chat Screen**
 <br><br>
-<img src="screenshots/2.png" alt="Chat Screen" width="200"/>
+<img src="https://raw.githubusercontent.com/kreggscode/Voltaire-Insights/main/screenshots/2.png" alt="Chat Screen" width="200"/>
 
 *AI-powered chat with Voltaire*
 
@@ -281,7 +281,7 @@ These files are automatically loaded and merged on first launch.
 
 **⭐ Favorites**
 <br><br>
-<img src="screenshots/3.png" alt="Favorites" width="200"/>
+<img src="https://raw.githubusercontent.com/kreggscode/Voltaire-Insights/main/screenshots/3.png" alt="Favorites" width="200"/>
 
 *Saved quotes in one place*
 
@@ -292,7 +292,7 @@ These files are automatically loaded and merged on first launch.
 
 **📚 Works**
 <br><br>
-<img src="screenshots/4.png" alt="Works" width="200"/>
+<img src="https://raw.githubusercontent.com/kreggscode/Voltaire-Insights/main/screenshots/4.png" alt="Works" width="200"/>
 
 *Voltaire's literary works*
 
@@ -301,7 +301,7 @@ These files are automatically loaded and merged on first launch.
 
 **⚙️ Settings**
 <br><br>
-<img src="screenshots/5.png" alt="Settings" width="200"/>
+<img src="https://raw.githubusercontent.com/kreggscode/Voltaire-Insights/main/screenshots/5.png" alt="Settings" width="200"/>
 
 *Daily quotes, random quotes, and app preferences*
 
@@ -310,7 +310,7 @@ These files are automatically loaded and merged on first launch.
 
 **💬 Quote Details**
 <br><br>
-<img src="screenshots/6.png" alt="Quote Details" width="200"/>
+<img src="https://raw.githubusercontent.com/kreggscode/Voltaire-Insights/main/screenshots/6.png" alt="Quote Details" width="200"/>
 
 *Full quote with French translation and actions*
 
@@ -321,7 +321,7 @@ These files are automatically loaded and merged on first launch.
 
 **🎨 Category View**
 <br><br>
-<img src="screenshots/7.png" alt="Category View" width="300"/>
+<img src="https://raw.githubusercontent.com/kreggscode/Voltaire-Insights/main/screenshots/7.png" alt="Category View" width="300"/>
 
 *Quotes filtered by category*
 
@@ -330,7 +330,7 @@ These files are automatically loaded and merged on first launch.
 
 **📱 App Overview**
 <br><br>
-<img src="screenshots/8.png" alt="App Overview" width="300"/>
+<img src="https://raw.githubusercontent.com/kreggscode/Voltaire-Insights/main/screenshots/8.png" alt="App Overview" width="300"/>
 
 *Beautiful floating navigation and modern design*
 

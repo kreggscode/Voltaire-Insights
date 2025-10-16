@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voltaire Insights - Discover Timeless Wisdom</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,11 +15,13 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-attachment: fixed;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .container {
@@ -27,106 +32,205 @@
 
         header {
             text-align: center;
-            padding: 100px 0 50px;
+            padding: 120px 0 80px;
             color: white;
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            z-index: -1;
         }
 
         header h1 {
-            font-size: 3.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
         }
 
         header p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease-out 0.2s both;
         }
 
         .btn {
             display: inline-block;
-            background: #ff6b6b;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
             color: white;
-            padding: 15px 40px;
+            padding: 18px 45px;
             text-decoration: none;
             border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:hover {
-            background: #ff5252;
+            background: linear-gradient(45deg, #ee5a24, #ff6b6b);
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4);
         }
 
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 80px 0;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            padding: 100px 0;
         }
 
         .feature-card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            padding: 50px 35px;
+            border-radius: 25px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
         }
 
         .feature-card h3 {
             color: #4facfe;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+            font-weight: 600;
         }
 
         .feature-card p {
-            color: #666;
+            color: #4a5568;
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
             margin-bottom: 20px;
+            display: block;
         }
 
         .about {
-            background: white;
-            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            padding: 100px 0;
             text-align: center;
+            border-radius: 30px;
+            margin: 50px 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
         .about h2 {
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 40px;
+            font-size: 3rem;
+            font-family: 'Playfair Display', serif;
         }
 
         .about p {
-            max-width: 800px;
-            margin: 0 auto;
-            color: #666;
-            font-size: 1.1rem;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            color: #4a5568;
+            font-size: 1.2rem;
             line-height: 1.8;
         }
 
         footer {
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.9);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
             color: white;
             text-align: center;
-            padding: 30px 0;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         footer a {
             color: #4facfe;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         footer a:hover {
-            text-decoration: underline;
+            color: #63b3ed;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 3rem;
+            }
+
+            header p {
+                font-size: 1.2rem;
+            }
+
+            .feature-card {
+                padding: 40px 25px;
+            }
+
+            .about h2 {
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
@@ -142,27 +246,33 @@
     <section class="features">
         <div class="container">
             <div class="feature-card">
-                <h3>💬 1000+ Quotes</h3>
+                <span class="icon">💬</span>
+                <h3>1000+ Wisdom Quotes</h3>
                 <p>Explore profound wisdom from Voltaire's works, organized in 20+ categories including Freedom, Love, and Philosophy.</p>
             </div>
             <div class="feature-card">
-                <h3>🤖 AI Chat with Voltaire</h3>
+                <span class="icon">🤖</span>
+                <h3>AI Chat with Voltaire</h3>
                 <p>Engage in intelligent conversations with an AI-powered Voltaire. Discuss philosophy, get insights, and explore timeless wisdom.</p>
             </div>
             <div class="feature-card">
-                <h3>🎨 Beautiful Design</h3>
+                <span class="icon">🎨</span>
+                <h3>Beautiful Design</h3>
                 <p>Experience iOS-inspired interface with glassmorphism effects, gradient cards, and smooth animations in light and dark themes.</p>
             </div>
             <div class="feature-card">
-                <h3>⭐ Favorites & Notifications</h3>
+                <span class="icon">⭐</span>
+                <h3>Favorites & Notifications</h3>
                 <p>Save your favorite quotes and receive daily notifications with Voltaire's wisdom at 9 AM.</p>
             </div>
             <div class="feature-card">
-                <h3>🇫🇷 French Translations</h3>
+                <span class="icon">🇫🇷</span>
+                <h3>French Translations</h3>
                 <p>Read quotes in their original French alongside English translations for authentic Voltaire experience.</p>
             </div>
             <div class="feature-card">
-                <h3>🔒 Privacy First</h3>
+                <span class="icon">🔒</span>
+                <h3>Privacy First</h3>
                 <p>Your data is secure with encrypted processing. Chat messages are handled privately with no permanent storage.</p>
             </div>
         </div>

@@ -14,7 +14,7 @@ android {
         applicationId = "com.kreggscode.voltairequotes"
         minSdk = 24
         targetSdk = 36
-        versionCode = 6
+        versionCode = 8
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -95,16 +95,13 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
     
     // OkHttp for API calls
-    implementation("com.squareup.okhttp3:okhttp:5.1.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:5.1.0")
+    implementation("com.squareup.okhttp3:okhttp:5.2.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.2.1")
     
     // Retrofit for REST API
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
     implementation("com.google.code.gson:gson:2.13.2")
-    
-    // Accompanist (for system UI controller)
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.36.0")
     
     // Testing
     testImplementation("junit:junit:4.13.2")

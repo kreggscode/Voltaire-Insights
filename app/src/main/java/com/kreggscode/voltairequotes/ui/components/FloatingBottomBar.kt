@@ -1,7 +1,10 @@
 package com.kreggscode.voltairequotes.ui.components
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.*
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,6 +19,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -34,13 +38,28 @@ fun FloatingBottomBar(
 ) {
     val isDark = MaterialTheme.colorScheme.background == Color(0xFF000000)
     
-    // Use a transparent background container
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(Color.Transparent),
-        contentAlignment = Alignment.BottomCenter
+    // Detect if keyboard is visible
+    val imeInsets = WindowInsets.ime
+    val density = LocalDensity.current
+    val isKeyboardVisible = remember {
+        derivedStateOf {
+            imeInsets.getBottom(density) > 0
+        }
+    }.value
+    
+    // Hide bottom bar when keyboard is visible
+    AnimatedVisibility(
+        visible = !isKeyboardVisible,
+        enter = slideInVertically(initialOffsetY = { it }),
+        exit = slideOutVertically(targetOffsetY = { it })
     ) {
+        Box(
+            modifier = modifier
+                .fillMaxWidth()
+                .navigationBarsPadding()
+                .background(Color.Transparent),
+            contentAlignment = Alignment.BottomCenter
+        ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -81,6 +100,7 @@ fun FloatingBottomBar(
                     }
                 }
             }
+        }
         }
     }
 }

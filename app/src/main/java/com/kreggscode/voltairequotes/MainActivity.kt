@@ -1,9 +1,13 @@
 package com.kreggscode.voltairequotes
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Chat
@@ -21,6 +25,7 @@ import com.kreggscode.voltairequotes.navigation.Screen
 import com.kreggscode.voltairequotes.notifications.NotificationScheduler
 import com.kreggscode.voltairequotes.ui.components.BottomNavItem
 import com.kreggscode.voltairequotes.ui.components.FloatingBottomBar
+import com.kreggscode.voltairequotes.ui.screens.SplashScreen
 import com.kreggscode.voltairequotes.ui.theme.VoltaireTheme
 import com.kreggscode.voltairequotes.viewmodel.ChatViewModel
 import com.kreggscode.voltairequotes.viewmodel.QuoteViewModel
@@ -47,12 +52,44 @@ class MainActivity : ComponentActivity() {
         
         setContent {
             val isDarkMode by quoteViewModel.isDarkMode.collectAsState()
+            var showSplash by remember { mutableStateOf(true) }
+            
+            // Update system bar colors based on theme
+            LaunchedEffect(isDarkMode) {
+                if (isDarkMode) {
+                    // Dark mode: light icons on dark background
+                    enableEdgeToEdge(
+                        statusBarStyle = SystemBarStyle.dark(
+                            scrim = android.graphics.Color.TRANSPARENT
+                        ),
+                        navigationBarStyle = SystemBarStyle.dark(
+                            scrim = android.graphics.Color.TRANSPARENT
+                        )
+                    )
+                } else {
+                    // Light mode: dark icons on light background
+                    enableEdgeToEdge(
+                        statusBarStyle = SystemBarStyle.light(
+                            scrim = android.graphics.Color.TRANSPARENT,
+                            darkScrim = android.graphics.Color.TRANSPARENT
+                        ),
+                        navigationBarStyle = SystemBarStyle.light(
+                            scrim = android.graphics.Color.TRANSPARENT,
+                            darkScrim = android.graphics.Color.TRANSPARENT
+                        )
+                    )
+                }
+            }
             
             VoltaireTheme(darkTheme = isDarkMode) {
-                MainScreen(
-                    quoteViewModel = quoteViewModel,
-                    chatViewModel = chatViewModel
-                )
+                if (showSplash) {
+                    SplashScreen(onSplashComplete = { showSplash = false })
+                } else {
+                    MainScreen(
+                        quoteViewModel = quoteViewModel,
+                        chatViewModel = chatViewModel
+                    )
+                }
             }
         }
     }
@@ -104,7 +141,9 @@ fun MainScreen(
             }
         },
         containerColor = MaterialTheme.colorScheme.background,
-        contentColor = MaterialTheme.colorScheme.onBackground
+        contentColor = MaterialTheme.colorScheme.onBackground,
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+        modifier = Modifier.fillMaxSize()
     ) { paddingValues ->
         Box(
             modifier = Modifier

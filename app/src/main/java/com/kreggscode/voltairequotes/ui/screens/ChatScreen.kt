@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -17,11 +18,17 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import kotlin.math.sin
 import com.kreggscode.voltairequotes.ui.components.MorphismCard
 import com.kreggscode.voltairequotes.viewmodel.ChatMessage
 import com.kreggscode.voltairequotes.viewmodel.ChatViewModel
@@ -39,6 +46,15 @@ fun ChatScreen(
     var inputText by remember { mutableStateOf("") }
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
+    
+    // Detect if keyboard is visible
+    val imeInsets = WindowInsets.ime
+    val density = LocalDensity.current
+    val isKeyboardVisible = remember {
+        derivedStateOf {
+            imeInsets.getBottom(density) > 0
+        }
+    }.value
     
     // Show error snackbar if there's an error
     val snackbarHostState = remember { SnackbarHostState() }
@@ -61,6 +77,18 @@ fun ChatScreen(
     }
     
     var showDeleteDialog by remember { mutableStateOf(false) }
+    
+    // Animated background
+    val infiniteTransition = rememberInfiniteTransition(label = "background")
+    val animatedOffset by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(8000, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "offset"
+    )
     
     if (showDeleteDialog) {
         AlertDialog(
@@ -85,53 +113,104 @@ fun ChatScreen(
         )
     }
     
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = "Chat with Voltaire",
-                            style = MaterialTheme.typography.titleLarge
-                        )
-                        Text(
-                            text = "Philosopher of Enlightenment",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                        )
-                    }
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBackClick) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Back"
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(
-                        onClick = { showDeleteDialog = true },
-                        enabled = messages.size > 1
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.DeleteOutline,
-                            contentDescription = "New Chat",
-                            tint = if (messages.size > 1) 
-                                MaterialTheme.colorScheme.onSurface 
-                            else 
-                                MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        MaterialTheme.colorScheme.background,
+                        Color(0xFF4facfe).copy(alpha = 0.08f * (0.5f + 0.5f * sin(animatedOffset * Math.PI.toFloat())))
+                    )
                 )
             )
-        },
-        snackbarHost = { SnackbarHost(snackbarHostState) },
-        containerColor = MaterialTheme.colorScheme.background
-    ) { paddingValues ->
+    ) {
+        // Floating orb
+        Box(
+            modifier = Modifier
+                .offset(x = 200.dp, y = (400 + animatedOffset * 50).dp)
+                .size(180.dp)
+                .alpha(0.15f)
+                .blur(65.dp)
+                .background(
+                    brush = Brush.radialGradient(
+                        colors = listOf(
+                            Color(0xFF4facfe).copy(alpha = 0.5f),
+                            Color.Transparent
+                        )
+                    ),
+                    shape = CircleShape
+                )
+        )
+        
+        Scaffold(
+            topBar = {
+                Surface(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.85f),
+                    tonalElevation = 12.dp,
+                    shadowElevation = 8.dp
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 12.dp, vertical = 12.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            IconButton(onClick = onBackClick) {
+                                Icon(
+                                    imageVector = Icons.Default.ArrowBack,
+                                    contentDescription = "Back",
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(28.dp)
+                                )
+                            }
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Column {
+                                Text(
+                                    text = "🧙‍♂️",
+                                    fontSize = 36.sp
+                                )
+                                Text(
+                                    text = "Chat with Voltaire",
+                                    style = MaterialTheme.typography.titleLarge,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    color = MaterialTheme.colorScheme.primary,
+                                    fontSize = 20.sp
+                                )
+                                Text(
+                                    text = "Philosopher of Enlightenment",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                                )
+                            }
+                        }
+                        IconButton(
+                            onClick = { showDeleteDialog = true },
+                            enabled = messages.size > 1
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.DeleteOutline,
+                                contentDescription = "New Chat",
+                                tint = if (messages.size > 1) 
+                                    MaterialTheme.colorScheme.error
+                                else 
+                                    MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f),
+                                modifier = Modifier.size(26.dp)
+                            )
+                        }
+                    }
+                }
+            },
+            snackbarHost = { SnackbarHost(snackbarHostState) },
+            containerColor = Color.Transparent,
+            contentWindowInsets = WindowInsets(0, 0, 0, 0)
+        ) { paddingValues ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -140,13 +219,14 @@ fun ChatScreen(
             // Messages list
             LazyColumn(
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .imePadding(),
                 state = listState,
                 contentPadding = PaddingValues(
                     start = 16.dp,
                     end = 16.dp,
                     top = 16.dp,
-                    bottom = 120.dp // Space for floating input box + nav bar
+                    bottom = 180.dp // Space for input box (72dp) + nav bar (88dp) + extra spacing
                 ),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
@@ -161,12 +241,15 @@ fun ChatScreen(
                 }
             }
             
-            // Floating input area
+            // Floating input area - positioned above bottom navigation bar with visible gap
             Surface(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 100.dp),
+                    .padding(horizontal = 16.dp)
+                    .padding(bottom = 96.dp) // 72dp (nav bar height) + 24dp (visible gap)
+                    .imePadding()
+                    .navigationBarsPadding(),
                 shape = RoundedCornerShape(28.dp),
                 color = MaterialTheme.colorScheme.surface,
                 shadowElevation = 12.dp,
@@ -222,6 +305,7 @@ fun ChatScreen(
                 }
             }
         }
+    }
     }
 }
 
